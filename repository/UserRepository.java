@@ -69,7 +69,7 @@ public class UserRepository {
         Address a2 = em.merge(a1);
         em.refresh(a2);
         a2.setUser(u2);
-        return null;
+        return a2;
     }
 
     /**
@@ -78,18 +78,25 @@ public class UserRepository {
      * @return
      */
     public List<Address> listAddresses(int uid) {
-        return List.of();
+
+        User u = em.find(User.class, uid);
+        List addresses = u.getAddresses();
+        return addresses;
     }
 
     public void removeAddress(int aid) {
 
+        Address a1 = em.find(Address.class, aid);
+        em.remove(a1);
     }
 
     /**
      * 删除用户，设置级联操作或手动删除相关地址
      * @param uid
      */
-    public void remaveUser(int uid) {
+    public void removeUser(int uid) {
 
+        User u1 = em.find(User.class, uid);
+        em.remove(u1);
     }
 }
