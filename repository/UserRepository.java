@@ -98,5 +98,6 @@ public class UserRepository {
 
         User u1 = em.find(User.class, uid);
         em.remove(u1);
+
     }
 }
